@@ -3,7 +3,7 @@ package Farmio;
 import java.io.IOException;
 
 public class Menu {
-    private static final String ART_NAME = "menu";
+    private static final String ART_NAME = "menu"; // change the dir of the art
     private static final String BULLET = "\t\u2022";
     public static void show(Ui ui, Storage storage, boolean resume){
         ui.clearScreen();
