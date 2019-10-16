@@ -27,11 +27,14 @@ public class TaskList extends ArrayList<Task>{
         return this.remove(0);
     }
 
-    public JSONArray toJSON(){
-        JSONArray array = new JSONArray();
-        for(Task task: this){
-            array.add(task.toJSON());
-        }
-        return array;
+//    public JSONArray toJSON(){
+//        JSONArray array = new JSONArray();
+//        for(Task task: this){
+//            array.add(task.toJSON());
+//        }
+//        return array;
+//    }
+    public ArrayList<String> toStringArray() {
+        return new ArrayList<String>();
     }
 }

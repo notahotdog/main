@@ -2,9 +2,8 @@ package Farmio;
 
 import Commands.Command;
 import FarmioExceptions.FarmioException;
-import org.json.simple.parser.ParseException;
-
-import java.io.IOException;
+import FrontEnd.GameConsole;
+import FrontEnd.Ui;
 
 public class Farmio {
     private Storage storage;
@@ -16,6 +15,7 @@ public class Farmio {
 
     private Farmio() {
         this.storage = new Storage();
+        this.farmer = new Farmer(); //for ui testing not originally here
         this.ui = new Ui(storage);
         stage = Stage.WELCOME;
         isExit = false;
@@ -23,10 +23,11 @@ public class Farmio {
 
     private void run() {
         ui.showWelcome();
+        ui.show(GameConsole.content(ui.loadStage("LevelTemplate", 1), this));
+        ui.typeWriter("story board or instructions go here...\t\t\t\t\tpress ENTER to continue");
         Command command;
         while(!isExit){
             try {
-                System.out.println(stage.name());
                 command = Parser.parse(ui.getInput(), stage);
                 command.execute(this);
                 isExit = command.isExit;
@@ -81,48 +82,4 @@ public class Farmio {
     public void setExit(){
         this.isExit = true;
     }
-
-//    public boolean getUserActions(Farmer farmer, Ui ui, Parser parser) {
-//        boolean isStart = false;
-//        boolean isExit = false;
-//        while (!isStart && !isExit) {
-//            String fullCommand = ui.getInput();
-//            try {
-//                Command c = Parser.parse(fullCommand);
-//                c.execute();
-//                isStart =  c.getIsStart();
-//                isExit = c.getIsExit();
-//            } catch (FarmioException e) {
-//                e.getMessage();
-//            }
-//        }
-//        return isExit;
-//    }
-
-//    private void loadLevel(Farmer farmer) {
-//        switch (farmer.level) {
-//            case 1:
-//                //in the future, will be simulating instead of just showing static message
-//                displayArt("level1");
-//                break;
-//            /*
-//            case 2:
-//                displayArt("level2");
-//                break;
-//            case 3:
-//                displayArt("level3");
-//                break;
-//            case 4:
-//                displayArt("level4");
-//                break;
-//             */
-//        }
-//        ui.getEnter();
-//    }
-
-//    private void checkObjectives(Farmer farmer) {
-//        //in future, end of day will also do other stuff like making the plant grow etc
-//        ui.show("End of Day!");
-//        ui.getEnter();
-//    }
 }

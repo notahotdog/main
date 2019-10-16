@@ -1,10 +1,13 @@
 package Farmio;
 
+import FrontEnd.Ui;
+
 import java.io.IOException;
 
 public class Menu {
     private static final String ART_NAME = "menu"; // change the dir of the art
     private static final String BULLET = "\t\u2022";
+
     public static void show(Ui ui, Storage storage, boolean resume){
         ui.clearScreen();
         ui.show("Loading...");
@@ -14,7 +17,7 @@ public class Menu {
         } catch (IOException e) {
             ui.showWarning(ART_NAME.substring(0, 1).toUpperCase() + ART_NAME.substring(1) + " ascii art missing!\n");
         }
-        menu.append("Farmio.Menu:\n");
+        menu.append("\nMenu:\n");
         if(resume){
             menu.append(BULLET);
             menu.append("Resume Game\n");

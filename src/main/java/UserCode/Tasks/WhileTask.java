@@ -1,8 +1,10 @@
 package UserCode.Tasks;
 
+import Farmio.Farmio;
+import FarmioExceptions.FarmioException;
 import UserCode.Actions.Action;
 import UserCode.Conditions.Condition;
-import Farmio.Ui;
+import FrontEnd.Ui;
 
 public class WhileTask extends Task {
 
@@ -11,9 +13,9 @@ public class WhileTask extends Task {
     }
 
     @Override
-    public void execute(Ui ui) { //if got error during the loop we use FarmioException to break out
-        while (checkCondition()) {
-            action.execute(ui);
+    public void execute(Farmio farmio) throws FarmioException { //if got error during the loop we use FarmioException to break out
+        while (checkCondition(farmio)) {
+            action.execute(farmio.getUi());
         }
     }
 }
