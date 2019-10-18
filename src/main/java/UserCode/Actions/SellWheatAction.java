@@ -1,24 +1,20 @@
 package UserCode.Actions;
 
-import Farmio.Farmer;
-import Places.ChickenFarm;
-import Places.CowFarm;
-import Places.Market;
-import Places.WheatFarm;
-import Simulations.Simulate;
+import Farmio.Farmio;
+import FrontEnd.Simulate;
 import FrontEnd.Ui;
-import org.json.simple.JSONObject;
 
 public class SellWheatAction extends Action {
 
-    public SellWheatAction(Farmer farmer) {
-        super(farmer);
+    public SellWheatAction(Farmio farmio) {
+        super(farmio);
+        this.type = ActionType.sellWheat;
     }
 
     @Override
     public void execute(Ui ui) {
         farmer.getWheatFarm().buySeeds(); //TODO create wheatFarm.sellWheat()
-        new Simulate(ui, "SellWheat", 10).simulate();
+        new Simulate("SellWheat", super.farmio).simulate(0, 7);
         ui.show("Selling wheat!");
     }
 

@@ -1,17 +1,14 @@
 package UserCode.Actions;
 
-import Farmio.Farmer;
-import Places.ChickenFarm;
-import Places.CowFarm;
-import Places.Market;
-import Places.WheatFarm;
-import Simulations.Simulate;
+import Farmio.Farmio;
+import FrontEnd.Simulate;
 import FrontEnd.Ui;
 
 public class BuySeedAction extends Action {
 
-    public BuySeedAction(Farmer farmer) {
-        super(farmer);
+    public BuySeedAction(Farmio farmio) {
+        super(farmio);
+        this.type = ActionType.buySeeds;
     }
 
     @Override
@@ -19,7 +16,7 @@ public class BuySeedAction extends Action {
         try {
             farmer.getWheatFarm().buySeeds();
             farmer.changeMoney(-100);
-            new Simulate(ui, "BuySeedSimulation", 4).simulate();
+            new Simulate("BuySeedSimulation", farmio).simulate(0, 4);
         } catch (Exception e) {
             e.getMessage();
         }

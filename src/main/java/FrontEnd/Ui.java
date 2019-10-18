@@ -1,5 +1,6 @@
 package FrontEnd;
 
+import Farmio.Farmio;
 import Farmio.Storage;
 
 import java.io.BufferedReader;
@@ -36,9 +37,11 @@ public class Ui {
         show("Bye-Bye");
     }
 
-    public void showNarrative(ArrayList<String> narratives) {
+    public void showNarrative(ArrayList<String> narratives, String directory, Farmio farmio) {
         for(int i = 0; i < narratives.size(); ++i){
             clearScreen();
+            show(GameConsole.content(loadStage(directory, i), farmio));
+//            typeWriter(narratives.get(i));
             show(narratives.get(i));
             if(i != narratives.size() - 1) {
                 show("Press ENTER to continue.");
@@ -115,6 +118,7 @@ public class Ui {
                 if (line.length() < 55) {
                     int padding_left = (55 - line.length()) / 2;
                     int padding_right = 55 - line.length() - padding_left;
+
                     line = blankSpace(padding_left) + line + blankSpace(padding_right);
                 } else if (line.length() > 55) {
                     line = blankSpace(55);
@@ -149,8 +153,5 @@ public class Ui {
                 Thread.currentThread().interrupt();
             }
         }
-    }
-    public void animate() { //just goes next screen without input
-
     }
 }
