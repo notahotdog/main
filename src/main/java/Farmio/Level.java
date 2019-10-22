@@ -7,6 +7,10 @@ import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
 
+
+
+
+
 public class Level {
     ArrayList<String> narratives;
     int startMoney;
@@ -32,14 +36,17 @@ public class Level {
         for (Object i : array) {
             narratives.add((String) i);
         }
-        startMoney = farmer.getMoney();
-        startWheatSeed = farmer.wheatFarm.getSeeds();
-        startWheatGreen = farmer.wheatFarm.getGreenWheat();
-        startWheatRipe = farmer.wheatFarm.getRipeWheat();
-        startChicken = 0;
-        startChickenEggs = 0;
-        startCow = 0;
-        startCowMilk = 0;
+        //startMoney = farmer.getMoney();
+        //startWheatSeed = farmer.wheatFarm.getSeeds();
+        //startWheatGreen = farmer.wheatFarm.getGreenWheat();
+        //startWheatRipe = farmer.wheatFarm.getRipeWheat();
+        //startChicken = 0;
+        //startChickenEggs = 0;
+        //startCow = 0;
+        //startCowMilk = 0;
+
+
+        //need to check against the json object
         endMoney = Math.toIntExact((Long) object.get("money"));
         endWheatSeed = Math.toIntExact((Long) object.get("wheat_seed"));
         endWheatGreen = Math.toIntExact((Long) object.get("wheat_green"));
@@ -54,8 +61,30 @@ public class Level {
         return narratives;
     }
 
-    public boolean checkAnswer(Farmio farmio){
+    public enum checkAnswer(Farmer farmer){
+
+        //can have multiple iterations
+       //check against farmer against -
+        //alldone
+
+
+
+        //checkObjectivesMet
+
+
+
+        //checkifDeadlineNotMet
+
+
+        //not done
+        //failed
+
+
         farmio.getUi().show("Checking answers now");
         return true;
+    }
+
+    enum levelState{
+        ALLDONE, NOTDONE, FAILED;
     }
 }

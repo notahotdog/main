@@ -77,6 +77,10 @@ public class Farmio {
         this.level = level;
     }
 
+    public void checkOjectives()
+
+
+
     public void setExit(){
         this.isExit = true;
     }
