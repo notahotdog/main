@@ -61,12 +61,19 @@ public class Level {
         return narratives;
     }
 
+
+    public allDone(Farmer farmer){
+
+
+    }
+
     public enum checkAnswer(Farmer farmer){
 
         //can have multiple iterations
        //check against farmer against -
         //alldone
-
+        if allDone(farmer) return levelState.ALLDONE;
+        else if
 
 
         //checkObjectivesMet
