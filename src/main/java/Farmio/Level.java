@@ -12,15 +12,9 @@ import java.util.ArrayList;
 
 
 public class Level {
+
     ArrayList<String> narratives;
-    int startMoney;
-    int startWheatSeed;
-    int startWheatGreen;
-    int startWheatRipe;
-    int startChicken;
-    int startChickenEggs;
-    int startCow;
-    int startCowMilk;
+    int gold;
     int endMoney;
     int endWheatSeed;
     int endWheatGreen;
@@ -29,6 +23,7 @@ public class Level {
     int endChickenEggs;
     int endCow;
     int endCowMilk;
+    int deadline;
 
     public Level(JSONObject object, Farmer farmer) {
         JSONArray array = (JSONArray) object.get("narratives");
@@ -36,17 +31,9 @@ public class Level {
         for (Object i : array) {
             narratives.add((String) i);
         }
-        //startMoney = farmer.getMoney();
-        //startWheatSeed = farmer.wheatFarm.getSeeds();
-        //startWheatGreen = farmer.wheatFarm.getGreenWheat();
-        //startWheatRipe = farmer.wheatFarm.getRipeWheat();
-        //startChicken = 0;
-        //startChickenEggs = 0;
-        //startCow = 0;
-        //startCowMilk = 0;
-
 
         //need to check against the json object
+        gold = farmer.getMoney();
         endMoney = Math.toIntExact((Long) object.get("money"));
         endWheatSeed = Math.toIntExact((Long) object.get("wheat_seed"));
         endWheatGreen = Math.toIntExact((Long) object.get("wheat_green"));
@@ -55,6 +42,7 @@ public class Level {
         endChickenEggs = 0;
         endCow = 0;
         endCowMilk = 0;
+        deadline = Math.toIntExact((Long) object.get("deadline"));
     }
 
     public ArrayList<String> getNarratives(){
@@ -62,36 +50,52 @@ public class Level {
     }
 
 
-    public allDone(Farmer farmer){
+    public boolean allDone(Farmer farmer){
+       int gold = farmer.getMoney();
 
+       //Wheat Farm
 
+       int WheatSeed = farmer.wheatFarm.getSeeds();
+       int WheatGreen = farmer.wheatFarm.getGreenWheat();
+       int WheatRipe = farmer.wheatFarm.getRipeWheat();
+
+       //Cow Farm
+
+       return (gold == endMoney )  && (WheatGreen == endWheatGreen)  && (WheatRipe == endWheatRipe) && (endWheatSeed == WheatSeed);
     }
 
-    public enum checkAnswer(Farmer farmer){
-
-        //can have multiple iterations
-       //check against farmer against -
-        //alldone
-        if allDone(farmer) return levelState.ALLDONE;
-        else if
+    public boolean checkDeadlineExceeded(int currentDay){
+        return deadline <= currentDay;
+    }
 
 
-        //checkObjectivesMet
+    public levelState checkAnswer(Farmer farmer){
+        assert farmer != null;
+        int day = farmer.getDay();
+        levelState currentLevelState;
+        if(checkDeadlineExceeded(day)){
+            currentLevelState =  levelState.FAILED;
+        }
+        else {
+            if (allDone(farmer)) {
+                 currentLevelState = levelState.ALLDONE;
+            }
+            else{
+                currentLevelState = levelState.NOTDONE;
+            }
+        }
+        return currentLevelState;
+    }
 
 
 
-        //checkifDeadlineNotMet
-
-
-        //not done
-        //failed
-
-
+        /*
         farmio.getUi().show("Checking answers now");
         return true;
-    }
+         */
 
     enum levelState{
         ALLDONE, NOTDONE, FAILED;
     }
+
 }

@@ -14,5 +14,6 @@
   "money": 100,
   "wheat_seed": 0,
   "wheat_green": 0,
-  "wheat_ripe": 0
+  "wheat_ripe": 0,
+  "deadline" : 5
 }
