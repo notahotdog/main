@@ -9,8 +9,12 @@ public class PlacesTest {
     ChickenFarm chickenFarm;
     CowFarm cowFarm;
 
-
-
+    /**
+     * Constructor for places test.
+     * Initialize a new wheatfarm object to test wheatFarm methods.
+     * Initialize a new chickenfarm object to test chickenFarm methods.
+     * Initialize a new cowfarm object to test cowfarm methods.
+     */
     public PlacesTest() {
         wheatFarm = new WheatFarm();
         chickenFarm = new ChickenFarm();
@@ -23,10 +27,11 @@ public class PlacesTest {
         assertEquals(wheatFarm.getSeeds(),1);
     }
 
+    @Test
     public void getSeedlings() {
         wheatFarm.buySeeds();
-
-        assertEquals(wheatFarm.getSeedlings(), 1);
+        wheatFarm.growSeedlings();
+        assertEquals(wheatFarm.getSeedlings(), 0);
     }
 
     @Test
@@ -112,6 +117,27 @@ public class PlacesTest {
     }
 
     @Test
+    public void getChicken() {
+        chickenFarm.buyChicken();
+        assertEquals(chickenFarm.getChicken(), 1);
+    }
+
+    @Test
+    public void getFullChicken() {
+        chickenFarm.buyChicken();
+        chickenFarm.layEggs();
+        chickenFarm.getFullChicken();
+    }
+
+    @Test
+    public void getEgg() {
+        chickenFarm.buyChicken();
+        chickenFarm.layEggs();
+        chickenFarm.collectEgg();
+        chickenFarm.getEgg();
+    }
+
+    @Test
     public void hasEgg() {
         chickenFarm.buyChicken();
         chickenFarm.layEggs();
@@ -148,9 +174,37 @@ public class PlacesTest {
     }
 
     @Test
-    public void hasCow() {
+    public void getCow() {
         cowFarm.buyCow();
         assertEquals(cowFarm.getCow(), 1);
+    }
+
+    @Test
+    public void getFullCow() {
+        cowFarm.buyCow();
+        cowFarm.growCow();
+        assertEquals(cowFarm.getFullCow(), 1);
+    }
+
+    @Test
+    public void hasFullCow() {
+        cowFarm.buyCow();
+        cowFarm.growCow();
+        assert cowFarm.hasFullCow();
+    }
+
+    @Test
+    public void getMilk() {
+        cowFarm.buyCow();
+        cowFarm.growCow();
+        cowFarm.milkCow();
+        assertEquals(cowFarm.getMilk(), 1);
+    }
+
+    @Test
+    public void hasCow() {
+        cowFarm.buyCow();
+        assert cowFarm.hasCow();
     }
 
     @Test
@@ -165,7 +219,7 @@ public class PlacesTest {
         cowFarm.buyCow();
         cowFarm.growCow();
         cowFarm.milkCow();
-        assertEquals(cowFarm.getMilk(), 1);
+        assert cowFarm.hasMilk();
     }
 
     @Test
