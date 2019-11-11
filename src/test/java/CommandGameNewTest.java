@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class CommandGameNewTest {
 
     @Test
-    public void executeTest(){
+    public void executeTest() {
         Farmio farmio = new Farmio(false);
         StorageDummy storage = (StorageDummy) farmio.getStorage();
         storage.setFrame(new ArrayList<>());
@@ -21,7 +21,7 @@ public class CommandGameNewTest {
             new CommandGameNew().execute(farmio);
             assertEquals(Farmio.Stage.NAME_ADD, farmio.getStage());
         } catch (Exception e) {
-            assert(false);
+            assert (false);
         }
     }
 }

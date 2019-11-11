@@ -59,57 +59,57 @@ public class StorageManagerTest {
     Storage storage = new StorageManager();
 
     @Test
-    void getSaveExistTest(){
+    void getSaveExistTest() {
         boolean isExist = new File("save.json").exists();
         assertEquals(isExist, storage.getSaveExist());
     }
 
     @Test
-    void storeFarmerTest(){
-        String checksum_expect = "f475115ca265ceede2bf68022624072b327d5733cc69bf0309d1d778393b14cb";
+    void storeFarmerTest() {
+        String checksumExpect = "9124abc9d047246c18360dc31e7bee7833e42cd72887e929d3e6bce4b3dbfaa1";
         try {
             JSONParser parser = new JSONParser();
             JSONObject object = (JSONObject) parser.parse(FARMER_JSON_1);
             Farmer farmer = new Farmer().setJson(object);
             storage.storeFarmer(farmer);
             String checksum = getChecksum("save.json");
-            assertEquals(checksum_expect, checksum);
+            assertEquals(checksumExpect, checksum);
         } catch (Exception e) {
-            assert(false);
+            assert (false);
         }
     }
 
     @Test
-    void loadFarmerTest(){
-        try{
+    void loadFarmerTest() {
+        try {
             JSONParser parser = new JSONParser();
             JSONObject objectStore = (JSONObject) parser.parse(FARMER_JSON_1);
             Farmer farmer = new Farmer().setJson(objectStore);
             storage.storeFarmer(farmer);
             JSONObject objectLoad = storage.loadFarmer();
             assertEquals(objectStore.toString(), objectLoad.toString());
-        } catch (Exception e){
-            assert(false);
+        } catch (Exception e) {
+            assert (false);
         }
     }
 
     @Test
-    void loadFarmerBackupTest(){
-        try{
+    void loadFarmerBackupTest() {
+        try {
             JSONParser parser = new JSONParser();
             JSONObject objectStore = (JSONObject) parser.parse(FARMER_JSON_1);
             Farmer farmer = new Farmer().setJson(objectStore);
             storage.storeFarmer(farmer);
             JSONObject objectLoad = storage.loadFarmerBackup();
             assertEquals(objectStore.toString(), objectLoad.toString());
-        } catch (Exception e){
-            assert(false);
+        } catch (Exception e) {
+            assert (false);
         }
     }
 
     @Test
-    void storeFarmerPartialTest(){
-        try{
+    void storeFarmerPartialTest() {
+        try {
             JSONParser parser = new JSONParser();
             JSONObject objectStore = (JSONObject) parser.parse(FARMER_JSON_1);
             Farmer farmer = new Farmer().setJson(objectStore);
@@ -118,39 +118,40 @@ public class StorageManagerTest {
             storage.storeFarmerPartial(farmer);
             JSONObject objectLoad = storage.loadFarmerBackup();
             assertEquals(objectStore.toString(), objectLoad.toString());
-        } catch (Exception e){
-            assert(false);
+        } catch (Exception e) {
+            assert (false);
         }
     }
 
     @Test
-    void loadFrameTest(){
+    void loadFrameTest() {
         try {
             ArrayList<String> frame = storage.loadFrame("Welcome", 1);
             Path path = Path.of(getClass().getClassLoader().getResource("asciiArt/Welcome/frame1.txt").toURI());
             List<String> list = Files.readAllLines(path);
-            assertEquals(frame.toString(),list.toString());
+            assertEquals(frame.toString(), list.toString());
         } catch (Exception e) {
-            assert(false);
+            assert (false);
         }
     }
 
     @Test
-    void loadLevelTest(){
+    void loadLevelTest() {
         try {
             JSONParser parser = new JSONParser();
             JSONObject jsonLevelExpect = (JSONObject) parser.parse(LEVEL_JSON);
             JSONObject jsonLevelActual = storage.getLevel(1.1);
             assertEquals(jsonLevelExpect, jsonLevelActual);
         } catch (Exception e) {
-            assert(false);
+            assert (false);
         }
     }
 
     private String getChecksum(String name) throws NoSuchAlgorithmException, IOException {
         MessageDigest md = MessageDigest.getInstance("SHA-256");
         try (DigestInputStream dis = new DigestInputStream(new FileInputStream(name), md)) {
-            while (dis.read() != -1) ;
+            while (dis.read() != -1) {
+            }
             md = dis.getMessageDigest();
         }
         StringBuilder result = new StringBuilder();
