@@ -72,7 +72,7 @@ public class LevelTest {
     public LevelTest() throws ParseException, FarmioException {
 
         Level level = new Level(jsonLevel, "tester");
-        Farmer farmer = new Farmer(jsonFarmer);
+      //  Farmer farmer = new Farmer(jsonFarmer);
         Farmio farmio = new Farmio(false);
 
         narratives = level.getNarratives();
