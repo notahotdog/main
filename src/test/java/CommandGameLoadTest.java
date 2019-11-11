@@ -14,8 +14,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class CommandGameLoadTest {
 
     private static final String FARMER_JSON = "{\"gold\":826,\"farm_chicken\":{\"chicken\":916,"
-            + "\"egg\":4296,\"fullChicken\":21},\"level\":1.1,\"task_current\":-1,\"farm_wheat\":{\"seed\""
-            + ":991,\"wheat\":18,\"grain\":3,\"seedling\":1},\"name\":\"FAME\",\"task_status_fail\":false,\"l"
+            + "\"egg\":4296,\"fullChicken\":21},\"level\":1.1,\"farm_wheat\":{\"seed\""
+            + ":991,\"wheat\":18,\"grain\":3,\"seedling\":1},\"name\":\"FAME\",\"l"
             + "ocation\":\"WheatFarm\",\"farm_cow\":{\"milk\":888,\"cow\":437,\"fullcow\":381},\"task_list\":"
             + "[{\"condition\":{\"condition_type\":\"BOOLEAN\",\"condition_boolean_type\":\"TRUE\"},\"action\""
             + ":\"gotoMarket\",\"type\":\"DO\"}],\"day\":903}";
@@ -48,14 +48,14 @@ public class CommandGameLoadTest {
             JSONParser parser = new JSONParser();
             JSONObject jsonFarmer = (JSONObject) parser.parse(FARMER_JSON);
             JSONObject jsonLevel = (JSONObject) parser.parse(LEVEL_JSON);
-            Farmer farmer = new Farmer().setJson(jsonFarmer);
-            Level level = new Level(jsonLevel, farmer.getName());
             Farmio farmio = new Farmio(false);
             StorageDummy storage = (StorageDummy) farmio.getStorage();
             storage.setFrame(new ArrayList<>());
             storage.setFarmer(jsonFarmer);
             storage.setLevel(jsonLevel);
             new CommandGameLoad().execute(farmio);
+            Farmer farmer = new Farmer().setJson(jsonFarmer);
+            Level level = new Level(jsonLevel, farmer.getName());
             assertEquals(FARMER_JSON, farmio.getFarmer().toJson().toString());
             assertEquals(level.getNarratives(), farmio.getLevel().getNarratives());
             assertEquals(Farmio.Stage.LEVEL_START, farmio.getStage());
