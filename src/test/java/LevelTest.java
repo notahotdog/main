@@ -16,8 +16,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LevelTest {
 
     private static final String FARMER_JSON = "{\"gold\":826,\"farm_chicken\":{\"chicken\":916,"
-            + "\"egg\":4296,\"fullChicken\":21},\"level\":1.1,\"task_current\":-1,\"farm_wheat\":{\"seed\""
-            + ":991,\"wheat\":18,\"grain\":3,\"seedling\":1},\"name\":\"FAME\",\"task_status_fail\":false,\"l"
+            + "\"egg\":4296,\"fullChicken\":21},\"level\":1.1,\"farm_wheat\":{\"seed\""
+            + ":991,\"wheat\":18,\"grain\":3,\"seedling\":1},\"name\":\"FAME\",\"l"
             + "ocation\":\"WheatFarm\",\"farm_cow\":{\"milk\":888,\"cow\":437,\"fullcow\":381},\"task_list\":"
             + "[{\"condition\":{\"condition_type\":\"BOOLEAN\",\"condition_boolean_type\":\"TRUE\"},\"action\""
             + ":\"gotoMarket\",\"type\":\"DO\"}],\"day\":903}";
